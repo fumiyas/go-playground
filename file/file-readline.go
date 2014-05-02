@@ -25,6 +25,7 @@ func main() {
 		log.Printf("ERROR: %s", err)
 		os.Exit(1)
 	}
+	defer file.Close()
 
 	rd := bufio.NewReaderSize(file, 10)
 	for {
