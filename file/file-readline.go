@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"syscall"
 	"bufio"
 	"fmt"
 )
@@ -15,6 +16,13 @@ func main() {
 
 	file, err := os.Open(os.Args[1])
 	if err != nil {
+		if os.IsNotExist(err) {
+			log.Print("ENOENT")
+		}
+		if err.(*os.PathError).Err == syscall.ENOENT {
+			log.Print("ENOENT")
+		}
+		log.Printf("ERROR: %s", err)
 		os.Exit(1)
 	}
 
