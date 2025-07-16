@@ -29,19 +29,11 @@ func main() {
 
 	rd := bufio.NewReaderSize(file, 10)
 	for {
-		line, prefix_p, err := rd.ReadLine()
+		line, err := rd.ReadString('\n')
 		if err != nil {
 			break
 		}
 
-		var eol string
-		if prefix_p {
-			eol = ""
-		} else {
-			eol = "\n"
-		}
-
-		fmt.Printf("%s%s", line, eol)
+		fmt.Printf("[%s]", line)
 	}
 }
-
